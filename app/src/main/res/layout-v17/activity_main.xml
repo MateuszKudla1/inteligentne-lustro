@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/black"
+    tools:context="com.example.mateusz.inteligentnelustro.MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fetch"
+        android:id="@+id/button"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView style="@style/TextColor"
+        android:id="@+id/news_3"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+
+        tools:text="Rancher killed in standoff vowed to die before going to jail"
+        android:layout_below="@+id/news_2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignRight="@+id/news_2"
+        android:layout_alignEnd="@+id/news_2" />
+
+    <TextView style="@style/TextColor"
+        android:id="@+id/news_4"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+
+        tools:text="Authorities: Last activists should leave wildlife preserve"
+        android:layout_below="@+id/news_3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp"
+        android:layout_alignRight="@+id/news_3"
+        android:layout_alignEnd="@+id/news_3" />
+
+    <TextView style="@style/TextColor"
+        android:id="@+id/news_2"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+
+        tools:text="Debate feud injects fresh chaos into GOP primary"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/news_1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/news_1"
+        android:layout_alignEnd="@+id/news_1" />
+
+    <TextClock style="@style/TimeStyle"
+        android:id="@+id/time"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="h\uee01mm"
+        android:format24Hour="H\uee01mm"
+        android:gravity="right"
+
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/button"
+        android:layout_toEndOf="@+id/button"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp" />
+
+    <TextView style="@style/TextColor"
+        android:id="@+id/news_1"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+
+        tools:text="Obama, Sanders at the White House: Nice chat but that's all"
+        android:textAppearance="@android:style/TextAppearance.Holo.Small"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/date"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextClock style="@style/TextColor"
+        android:id="@+id/date"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="EEEE\nMMMM d"
+        android:format24Hour="EEEE\nd MMMM"
+        android:gravity="right"
+        android:layout_marginLeft="42dp"
+        android:layout_marginStart="42dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_below="@+id/time"
+        android:layout_alignLeft="@+id/time"
+        android:layout_alignStart="@+id/time" />
+
+</RelativeLayout>
