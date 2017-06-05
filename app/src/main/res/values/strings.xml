@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Inteligentne Lustro</string>
+    <string name="location">Kielce</string>
+    <string name="temperature">28°</string>
+    <string name="conditions">Słonecznie</string>
     <string name="speech_prompt">Say something&#8230;</string>
     <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <color name="black">#000000</color>
