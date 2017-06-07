@@ -132,7 +132,9 @@ public class MainActivity extends AppCompatActivity {
                     if(result.get(0).equals("help") || result.get(0).equals("pomoc")  ){
                         help();
                     }
-
+                    if(result.get(0).toLowerCase().equals("pogoda")) {
+                        pogoda();
+                    }
                 }
                 break;
             }
@@ -164,7 +166,10 @@ public class MainActivity extends AppCompatActivity {
         thread.start();
     }
 
-
+    public void pogoda(){
+        Intent weatherIntent = new Intent(getApplicationContext(),WeatherActivity.class);
+        startActivity(weatherIntent);
+    }
 
 
 public void wiadomosci(){

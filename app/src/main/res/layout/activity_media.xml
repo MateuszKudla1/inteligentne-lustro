@@ -31,7 +31,6 @@
 
 
     <TextView style="@style/NewsStyle"
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news5"
@@ -43,7 +42,6 @@
         android:layout_alignParentEnd="true" />
 
     <TextView style="@style/NewsStyle"
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news6"
@@ -55,7 +53,6 @@
         android:layout_alignParentEnd="true" />
 
     <TextView style="@style/NewsStyle"
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news3"
@@ -66,7 +63,6 @@
         android:layout_alignParentEnd="true" />
 
     <TextView style="@style/NewsStyle"
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news4"
@@ -78,7 +74,6 @@
         android:layout_alignParentEnd="true" />
 
     <TextView style="@style/NewsStyle"
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news2"
@@ -90,7 +85,6 @@
         android:layout_alignParentEnd="true" />
 
     <TextView style="@style/NewsStyle"
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news1"
@@ -102,7 +96,6 @@
         android:layout_alignParentStart="true" />
 
     <TextView style="@style/NewsStyle"
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news7"

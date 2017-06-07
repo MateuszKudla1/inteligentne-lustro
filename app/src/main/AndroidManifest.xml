@@ -13,8 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginAndRegister"
-            android:launchMode="standard"
-            >
+            android:launchMode="standard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,13 +23,14 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="standard"
-            android:screenOrientation="landscape">
-            </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".MediaActivity"
             android:screenOrientation="landscape" />
-
-        <activity android:name=".Register"></activity>
+        <activity android:name=".Register" />
+        <activity android:name=".WeatherActivity"
+            android:screenOrientation="landscape"
+            ></activity>
     </application>
 
 </manifest>

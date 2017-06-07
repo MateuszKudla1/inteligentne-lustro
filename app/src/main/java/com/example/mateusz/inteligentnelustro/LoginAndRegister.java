@@ -1,5 +1,6 @@
 package com.example.mateusz.inteligentnelustro;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +18,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginAndRegister extends AppCompatActivity {
-
+    private ProgressDialog mProgress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_and_register);
 
+        mProgress = new ProgressDialog(LoginAndRegister.this);
+
+        mProgress.setMessage("Logowanie...");
+        mProgress.setCancelable(false);
+        mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgress.setIndeterminate(true);
         final EditText etEmail = (EditText) findViewById(R.id.etEmail);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final Button loginButton = (Button) findViewById(R.id.loginButton);
@@ -43,6 +50,7 @@ public class LoginAndRegister extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgress.show();
                 final String email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
@@ -53,15 +61,16 @@ public class LoginAndRegister extends AppCompatActivity {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
+                            // usunac (true)
+                            if ((success) || (true) ){
 
-                            if (success) {
-
-
+                                mProgress.dismiss();
 
                                 Intent intent = new Intent(LoginAndRegister.this, MainActivity.class);
 
                                 LoginAndRegister.this.startActivity(intent);
                             } else {
+                                mProgress.dismiss();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginAndRegister.this);
                                 builder.setMessage("Login Failed")
                                         .setNegativeButton("Retry", null)
