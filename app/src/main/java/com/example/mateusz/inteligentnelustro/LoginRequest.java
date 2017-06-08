@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRequest extends StringRequest {
-    private static final String LOGIN_REQUEST_URL = "https://mateuszkudla15.000webhostapp.com/Login.php";
+    private String zapas = "https://mateuszkudla15.000webhostapp.com/Login.php";
+    private static final String LOGIN_REQUEST_URL = "http://smartmirror94.pe.hu/Login.php";
     private Map<String, String> params;
 
     public LoginRequest(String email, String password, Response.Listener<String> listener) {

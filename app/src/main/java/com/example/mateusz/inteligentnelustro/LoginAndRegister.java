@@ -61,8 +61,8 @@ public class LoginAndRegister extends AppCompatActivity {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
-                            // usunac (true)
-                            if ((success) || (true) ){
+
+                            if (success){
 
                                 mProgress.dismiss();
 

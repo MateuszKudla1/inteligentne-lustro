@@ -132,7 +132,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:srcCompat="@drawable/a00"
+        app:srcCompat="@drawable/a0"
         android:id="@+id/day4image"
         android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/day3image"
@@ -141,7 +141,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:srcCompat="@drawable/a00"
+        app:srcCompat="@drawable/a0"
         android:id="@+id/day3image"
         android:layout_alignBottom="@+id/tvConditions"
         android:layout_alignLeft="@+id/day2image"
@@ -150,7 +150,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:srcCompat="@drawable/a00"
+        app:srcCompat="@drawable/a0"
         android:id="@+id/day2image"
         android:layout_above="@+id/day3"
         android:layout_alignLeft="@+id/day1image"
@@ -160,7 +160,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:srcCompat="@drawable/a00"
+        app:srcCompat="@drawable/a0"
         android:layout_marginLeft="84dp"
         android:layout_marginStart="84dp"
         android:id="@+id/day1image"
@@ -171,7 +171,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:srcCompat="@drawable/a00"
+        app:srcCompat="@drawable/a0"
         android:id="@+id/day5image"
         android:layout_below="@+id/day4"
         android:layout_alignLeft="@+id/day4image"
@@ -181,7 +181,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:srcCompat="@drawable/a00"
+        app:srcCompat="@drawable/a0"
         android:id="@+id/day6image"
         android:layout_alignTop="@+id/sunset"
         android:layout_alignLeft="@+id/day5image"

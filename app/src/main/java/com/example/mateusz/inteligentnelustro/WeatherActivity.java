@@ -105,8 +105,10 @@ public class WeatherActivity extends AppCompatActivity {
                         data = " "+fd.getDayW()+ " " + fd.getHigh() + "°c " + fd.getText();
                         tab3[i-1] = data;
                        tab4[i - 1] ="@drawable/" + "a" + fd.getCode();
+                    System.out.println(tab4[i-1]);
                   imageResources[i-1]  = getResources().getIdentifier(tab4[i-1], null, getPackageName());
                     resources[i-1] = getResources().getDrawable(imageResources[i-1]);
+
 
                 }
 

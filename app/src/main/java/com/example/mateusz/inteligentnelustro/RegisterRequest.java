@@ -9,7 +9,8 @@ package com.example.mateusz.inteligentnelustro;
         import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
-    private static final String REGISTER_REQUEST_URL = "https://mateuszkudla15.000webhostapp.com/Register.php";
+    private String zapas = "https://mateuszkudla15.000webhostapp.com/Register.php";
+    private static final String REGISTER_REQUEST_URL = "http://smartmirror94.pe.hu/Reister.php";
     private Map<String, String> params;
 
     public RegisterRequest(String name, String email, String password, Response.Listener<String> listener) {
