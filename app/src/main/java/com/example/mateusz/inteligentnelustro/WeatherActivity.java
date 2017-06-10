@@ -1,12 +1,17 @@
 package com.example.mateusz.inteligentnelustro;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mateusz.inteligentnelustro.weather.Channel;
 import com.example.mateusz.inteligentnelustro.weather.ForecastDay;
@@ -14,11 +19,16 @@ import com.example.mateusz.inteligentnelustro.weather.ForecastDay;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class WeatherActivity extends AppCompatActivity {
 
-     private String url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22Kielce%2C%20pl%22)%20and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+    private static final int REQ_CODE_SPEECH_INPUT = 100;
+    public String cityResult;
+    public String cityR = "Kielce";
+        private String url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+cityR+"%2C%20pl%22)%20and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
     private TextView temp,conditions,city,tvSunrise,tvSunset,tvDay1,tvDay2,tvDay3,tvDay4,tvDay5,tvDay6;
     private ImageView ivDay1,ivDay2,ivDay3,ivDay4,ivDay5,ivDay6;
     private final ImageView[] tab = {ivDay1,ivDay2,ivDay3,ivDay4,ivDay5,ivDay6};
@@ -57,21 +67,85 @@ public class WeatherActivity extends AppCompatActivity {
         ivDay5 = (ImageView) findViewById(R.id.day5image);
         ivDay6 = (ImageView) findViewById(R.id.day6image);
 
-        weather();
+        weather(url);
 
 
+        temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                promptSpeechInput();
+
+            }
+        });
 
 
 
     }
 
-    public void weather(){
+
+
+
+    /**
+     * Showing google speech input dialog
+     * */
+    private void promptSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                getString(R.string.speech_prompt));
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.speech_not_supported),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Receiving speech input
+     * */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    //txtSpeechInput.setText(result.get(0));
+
+                     cityResult = (String) result.get(0);
+                        weatherFill(cityResult);
+
+
+                }
+                break;
+            }
+
+        }
+    }
+
+
+
+
+
+
+
+    public void weather(final String urlS){
 
         Thread thread = new Thread( new Runnable(){
             @Override
             public void run() {
-                result = Network.get(url);
+                System.out.println(url);
+                System.out.println(cityResult);
+                System.out.println(cityR);
+                result = Network.get(urlS);
 
                 try {
                     JSONObject jo = new JSONObject(result);
@@ -138,4 +212,18 @@ public class WeatherActivity extends AppCompatActivity {
         });
         thread.start();
     }
+
+
+    public void weatherFill(String data){
+        System.out.println(data);
+        cityR = data;
+        String city2 = cityR;
+       String url2 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city2+"%2C%20pl%22)%20and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+        weather(url2);
+
+    }
+
+
+
+
 }

@@ -11,26 +11,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.mateusz.inteligentnelustro.MediaActivity">
 
-    <Button
-        android:text="MÓW"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/button2" />
 
-    <Button
-        android:text="STOP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/button2"
-        android:layout_toEndOf="@+id/button2"
-        android:id="@+id/stop" />
-
-
-    <TextView style="@style/NewsStyle"
+    <TextView style="@style/WeatherStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news5"
@@ -41,7 +23,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView style="@style/NewsStyle"
+    <TextView style="@style/WeatherStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news6"
@@ -52,17 +34,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView style="@style/NewsStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/news3"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/news2"
-        android:layout_alignStart="@+id/news2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView style="@style/NewsStyle"
+    <TextView style="@style/WeatherStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news4"
@@ -73,29 +45,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView style="@style/NewsStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/news2"
-        android:layout_below="@+id/news1"
-        android:layout_alignLeft="@+id/news1"
-        android:layout_alignStart="@+id/news1"
-        android:layout_marginTop="26dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView style="@style/NewsStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/news1"
-        android:layout_marginTop="37dp"
-        android:layout_below="@+id/button2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView style="@style/NewsStyle"
+    <TextView style="@style/WeatherStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news7"
@@ -104,5 +54,38 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:text="aaaaa" />
+
+    <TextView style="@style/WeatherStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/news1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView style="@style/WeatherStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/news3"
+        android:layout_below="@+id/news2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView style="@style/WeatherStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/news2"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/news1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

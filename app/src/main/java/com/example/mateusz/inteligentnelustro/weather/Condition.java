@@ -9,6 +9,11 @@ import org.json.JSONObject;
 public class Condition implements JsonPopulator {
 
     private JSONObject data;
+
+
+
+
+    private int code;
     private String temp;
     private String text;
 
@@ -34,5 +39,13 @@ public class Condition implements JsonPopulator {
 
     public String getText() {
         return text;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

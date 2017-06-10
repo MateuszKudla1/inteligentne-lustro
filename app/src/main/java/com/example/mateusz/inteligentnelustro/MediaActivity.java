@@ -33,9 +33,8 @@ public class MediaActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_media);
-        txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
-        b1=(Button)findViewById(R.id.button2);
-        stop = (Button)findViewById(R.id.stop);
+
+
         wiadomosci();
         news1 = (TextView) findViewById(R.id.news1);
         news2 = (TextView) findViewById(R.id.news2);
@@ -45,7 +44,7 @@ public class MediaActivity extends AppCompatActivity {
         news6 = (TextView) findViewById(R.id.news6);
         news7 = (TextView) findViewById(R.id.news7);
 
-        b1.setOnClickListener(new View.OnClickListener() {
+        news1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -54,7 +53,7 @@ public class MediaActivity extends AppCompatActivity {
             }
         });
 
-        stop.setOnClickListener(new View.OnClickListener() {
+        news2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 MainView();

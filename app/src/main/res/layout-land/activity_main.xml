@@ -12,17 +12,7 @@
     android:background="@color/black"
     tools:context="com.example.mateusz.inteligentnelustro.MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MÓW"
-        android:id="@+id/button"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView style="@style/TextColor"
+    <TextView style="@style/WeatherStyle"
         android:id="@+id/news_3"
 
         android:layout_width="wrap_content"
@@ -35,9 +25,10 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
         android:layout_alignRight="@+id/news_2"
-        android:layout_alignEnd="@+id/news_2" />
+        android:layout_alignEnd="@+id/news_2"
+        android:textSize="10dp" />
 
-    <TextView style="@style/TextColor"
+    <TextView style="@style/WeatherStyle"
         android:id="@+id/news_4"
 
         android:layout_width="wrap_content"
@@ -50,9 +41,10 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="11dp"
         android:layout_alignRight="@+id/news_3"
-        android:layout_alignEnd="@+id/news_3" />
+        android:layout_alignEnd="@+id/news_3"
+        android:textSize="10dp" />
 
-    <TextView style="@style/TextColor"
+    <TextView style="@style/WeatherStyle"
         android:id="@+id/news_2"
 
         android:layout_width="wrap_content"
@@ -65,36 +57,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/news_1"
-        android:layout_alignEnd="@+id/news_1" />
-
-    <Button
-        android:text="STOP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button"
-        android:layout_toRightOf="@+id/button"
-        android:layout_toEndOf="@+id/button"
-        android:id="@+id/stop" />
-
-    <TextClock style="@style/TimeStyle"
-        android:id="@+id/time"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:format12Hour="h\uee01mm"
-        android:format24Hour="H\uee01mm"
-        android:gravity="right"
-
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView style="@style/TextColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtSpeechInput"
-        android:layout_alignBottom="@+id/date"
-        android:layout_toLeftOf="@+id/stop"
-        android:layout_toStartOf="@+id/stop" />
+        android:layout_alignEnd="@+id/news_1"
+        android:textSize="10dp" />
 
     <TextView style="@style/TimeStyle"
         android:text="TextView"
@@ -109,9 +73,9 @@
         android:layout_marginEnd="15dp" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/sun"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/na"
         android:id="@+id/imageView"
         android:layout_marginRight="15dp"
         android:layout_marginEnd="15dp"
@@ -119,44 +83,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/weather" />
-
-    <TextClock style="@style/DateStyle"
-        android:id="@+id/date"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:format12Hour="EEEE\nMMMM d"
-        android:format24Hour="EEEE\nd MMMM"
-        android:gravity="right"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_below="@+id/time"
-        android:layout_alignRight="@+id/time"
-        android:layout_alignEnd="@+id/time"
-        android:layout_marginTop="17dp" />
-
-    <TextView style="@style/WeatherStyle"
-        android:text="TextView"
-        tools:text="słonecznie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Condition"
-        android:layout_marginRight="18dp"
-        android:layout_marginEnd="18dp"
-        android:layout_alignBaseline="@+id/date"
-        android:layout_alignBottom="@+id/date"
-        android:layout_alignRight="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView" />
-
-    <TextView style="@style/WeatherStyle"
-        android:text="TextView"
-        tools:text="Kielce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Location"
-        android:layout_alignBaseline="@+id/txtSpeechInput"
-        android:layout_alignBottom="@+id/txtSpeechInput"
-        android:layout_alignLeft="@+id/Condition"
-        android:layout_alignStart="@+id/Condition" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -167,7 +93,7 @@
         android:layout_alignStart="@+id/Location"
         android:id="@+id/imageView1"/>
 
-    <TextView style="@style/TextColor"
+    <TextView style="@style/WeatherStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news_5"
@@ -176,9 +102,10 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="12dp"
         android:layout_alignRight="@+id/news_4"
-        android:layout_alignEnd="@+id/news_4" />
+        android:layout_alignEnd="@+id/news_4"
+        android:textSize="10dp" />
 
-    <TextView style="@style/TextColor"
+    <TextView style="@style/WeatherStyle"
         android:id="@+id/news_1"
 
         android:layout_width="wrap_content"
@@ -191,9 +118,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textSize="10dp" />
 
-    <TextView style="@style/TextColor"
+    <TextView style="@style/WeatherStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/news_6"
@@ -203,5 +131,51 @@
         android:layout_marginTop="14dp"
         android:layout_alignRight="@+id/news_5"
         android:layout_alignEnd="@+id/news_5" />
+
+    <TextClock style="@style/TimeStyle"
+        android:id="@+id/time"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="h\uee01mm"
+        android:format24Hour="H\uee01mm"
+        android:gravity="right"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextClock style="@style/DateStyle"
+        android:id="@+id/date"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="EEEE\nMMMM d"
+        android:format24Hour="EEEE\nd MMMM"
+        android:gravity="right"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_below="@+id/time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView style="@style/WeatherStyle"
+        android:text="TextView"
+        tools:text="słonecznie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Condition"
+        android:layout_below="@+id/Temperature"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView" />
+
+    <TextView style="@style/WeatherStyle"
+        android:text="TextView"
+        tools:text="Kielce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Location"
+        android:layout_below="@+id/Condition"
+        android:layout_alignLeft="@+id/Condition"
+        android:layout_alignStart="@+id/Condition" />
 
 </RelativeLayout>
