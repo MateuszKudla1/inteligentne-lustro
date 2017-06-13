@@ -17,6 +17,8 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/etPassword"
+        android:background="@color/input_register_bg"
+        android:padding="10dp"
         android:hint="Passsword"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
@@ -27,6 +29,8 @@
     <EditText style="@style/TextColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/input_register_bg"
+        android:padding="10dp"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:layout_marginBottom="31dp"
@@ -38,26 +42,26 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <TextView style="@style/TextColor"
+        android:text="Register here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Register"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="66dp" />
+
     <Button
         android:text="Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/loginButton"
-        android:layout_alignTop="@+id/etPassword"
+        android:layout_marginTop="61dp"
+        android:layout_below="@+id/etPassword"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="62dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
-    <TextView style="@style/TextColor"
-        android:text="Register here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/loginButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:id="@+id/Register" />
 
 
 </RelativeLayout>

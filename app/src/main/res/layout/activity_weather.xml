@@ -13,62 +13,6 @@
     tools:context="com.example.mateusz.inteligentnelustro.WeatherActivity">
 
     <TextView style="@style/WeatherStyle"
-        android:text="City"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="37dp"
-        android:id="@+id/tvCity"
-        android:textSize="@dimen/medium_text_size" />
-
-    <TextView style="@style/WeatherStyle"
-        android:text="Mostly sunny"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvCity"
-        android:layout_alignLeft="@+id/tvCity"
-        android:layout_alignStart="@+id/tvCity"
-        android:layout_marginTop="39dp"
-        android:id="@+id/tvConditions" />
-
-    <TextView style="@style/WeatherStyle"
-        android:text="28°c"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/temperature"
-        android:textSize="@dimen/large_text_size"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="21dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/tvCity"
-        android:layout_toEndOf="@+id/tvCity" />
-
-    <TextView style="@style/WeatherStyle"
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvConditions"
-        android:layout_alignLeft="@+id/tvConditions"
-        android:layout_alignStart="@+id/tvConditions"
-        android:layout_marginTop="41dp"
-        android:id="@+id/sunrise" />
-
-    <TextView style="@style/WeatherStyle"
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sunrise"
-        android:layout_alignLeft="@+id/sunrise"
-        android:layout_alignStart="@+id/sunrise"
-        android:layout_marginTop="32dp"
-        android:id="@+id/sunset" />
-
-    <TextView style="@style/WeatherStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/day1image"
@@ -142,41 +86,30 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         app:srcCompat="@drawable/a0"
-        android:id="@+id/day3image"
-        android:layout_alignBottom="@+id/tvConditions"
-        android:layout_alignLeft="@+id/day2image"
-        android:layout_alignStart="@+id/day2image" />
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:srcCompat="@drawable/a0"
         android:id="@+id/day2image"
         android:layout_above="@+id/day3"
         android:layout_alignLeft="@+id/day1image"
         android:layout_alignStart="@+id/day1image"
         android:layout_marginBottom="14dp" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:srcCompat="@drawable/a0"
-        android:layout_marginLeft="84dp"
-        android:layout_marginStart="84dp"
-        android:id="@+id/day1image"
-        android:layout_alignTop="@+id/temperature"
-        android:layout_toRightOf="@+id/temperature"
-        android:layout_toEndOf="@+id/temperature" />
+    <TextView style="@style/WeatherStyle"
+        android:text="aaa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sunrise"
+        android:layout_alignTop="@+id/day5image"
+        android:layout_alignLeft="@+id/tvConditions"
+        android:layout_alignStart="@+id/tvConditions" />
 
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
         app:srcCompat="@drawable/a0"
         android:id="@+id/day5image"
-        android:layout_below="@+id/day4"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/day4image"
         android:layout_alignLeft="@+id/day4image"
-        android:layout_alignStart="@+id/day4image"
-        android:layout_marginTop="11dp" />
+        android:layout_alignStart="@+id/day4image" />
 
     <ImageView
         android:layout_width="30dp"
@@ -186,5 +119,71 @@
         android:layout_alignTop="@+id/sunset"
         android:layout_alignLeft="@+id/day5image"
         android:layout_alignStart="@+id/day5image" />
+
+    <TextView style="@style/WeatherStyle"
+        android:text="aaa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:id="@+id/sunset"
+        android:layout_below="@+id/day5image"
+        android:layout_alignLeft="@+id/sunrise"
+        android:layout_alignStart="@+id/sunrise" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/a0"
+        android:id="@+id/day3image"
+        android:layout_alignBottom="@+id/tvConditions"
+        android:layout_alignLeft="@+id/day2image"
+        android:layout_alignStart="@+id/day2image" />
+
+    <TextView style="@style/WeatherStyle"
+        android:text="Mostly sunny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvConditions"
+        android:layout_marginBottom="11dp"
+        android:layout_above="@+id/day4image"
+        android:layout_alignLeft="@+id/tvCity"
+        android:layout_alignStart="@+id/tvCity" />
+
+    <TextView style="@style/WeatherStyle"
+        android:text="City"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginStart="33dp"
+        android:id="@+id/tvCity"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_above="@+id/day2image"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/a0"
+        android:layout_marginLeft="82dp"
+        android:layout_marginStart="82dp"
+        android:id="@+id/day1image"
+        android:layout_alignTop="@+id/temperature"
+        android:layout_toRightOf="@+id/temperature"
+        android:layout_toEndOf="@+id/temperature"
+        android:layout_marginTop="12dp" />
+
+    <TextView style="@style/WeatherStyle"
+        android:text="28°c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/temperature"
+        android:textSize="@dimen/large_text_size"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_alignBaseline="@+id/tvCity"
+        android:layout_alignBottom="@+id/tvCity"
+        android:layout_toRightOf="@+id/tvCity"
+        android:layout_toEndOf="@+id/tvCity" />
 
 </RelativeLayout>

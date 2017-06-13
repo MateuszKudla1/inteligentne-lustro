@@ -2,7 +2,9 @@ package com.example.mateusz.inteligentnelustro;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,11 +21,19 @@ import com.example.mateusz.inteligentnelustro.weather.ForecastDay;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class WeatherActivity extends AppCompatActivity {
+import edu.cmu.pocketsphinx.Assets;
+import edu.cmu.pocketsphinx.Hypothesis;
+import edu.cmu.pocketsphinx.RecognitionListener;
+import edu.cmu.pocketsphinx.SpeechRecognizer;
+import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
+
+public class WeatherActivity extends AppCompatActivity implements RecognitionListener {
 
     private static final int REQ_CODE_SPEECH_INPUT = 100;
     public String cityResult;
@@ -40,6 +50,13 @@ public class WeatherActivity extends AppCompatActivity {
     private Channel channel;
     private Drawable[] resources = new Drawable[7];
     private List<ForecastDay> fList;
+
+    private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+    private static final String KWS_SEARCH = "wakeup";
+    private static final String KEYPHRASE = "hello";
+    private SpeechRecognizer recognizer;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +85,7 @@ public class WeatherActivity extends AppCompatActivity {
         ivDay6 = (ImageView) findViewById(R.id.day6image);
 
         weather(url);
-
+        runRecognizerSetup();
 
         temp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +127,7 @@ public class WeatherActivity extends AppCompatActivity {
      * */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        recognizer.startListening(KWS_SEARCH);
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
@@ -119,10 +137,14 @@ public class WeatherActivity extends AppCompatActivity {
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     //txtSpeechInput.setText(result.get(0));
-
-                     cityResult = (String) result.get(0);
-                        weatherFill(cityResult);
-
+                    if(result.get(0).equals("ekran główny")){
+                        MainView();
+                        recognizer.cancel();
+                        recognizer.shutdown();
+                    }else {
+                         cityResult = (String) result.get(0);
+                         weatherFill(cityResult);
+                    }
 
                 }
                 break;
@@ -131,7 +153,10 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
-
+    public void MainView(){
+        Intent startIntent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(startIntent);
+    }
 
 
 
@@ -224,6 +249,149 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
 
+    private void runRecognizerSetup() {
+        // Recognizer initialization is a time-consuming and it involves IO,
+        // so we execute it in async task
+        new AsyncTask<Void, Void, Exception>() {
+            @Override
+            protected Exception doInBackground(Void... params) {
+                try {
+                    Assets assets = new Assets(WeatherActivity.this);
+                    File assetDir = assets.syncAssets();
+                    setupRecognizer(assetDir);
+                } catch (IOException e) {
+                    return e;
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Exception result) {
+                if (result != null) {
 
 
+                } else {
+                    switchSearch(KWS_SEARCH);
+                }
+
+            }
+        }.execute();
+    }
+
+    private void setupRecognizer(File assetsDir) throws IOException {
+        // The recognizer can be configured to perform multiple searches
+        // of different kind and switch between them
+
+        recognizer = SpeechRecognizerSetup.defaultSetup()
+                .setAcousticModel(new File(assetsDir, "en-us-ptm"))
+                .setDictionary(new File(assetsDir, "cmudict-en-us.dict"))
+
+                .setRawLogDir(assetsDir) // To disable logging of raw audio comment out this call (takes a lot of space on the device)
+
+                .getRecognizer();
+        recognizer.addListener(this);
+
+        /** In your application you might not need to add all those searches.
+         * They are added here for demonstration. You can leave just one.
+         */
+
+        // Create keyword-activation search.
+        recognizer.addKeyphraseSearch(KWS_SEARCH, KEYPHRASE);
+
+
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSIONS_REQUEST_RECORD_AUDIO) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                runRecognizerSetup();
+            } else {
+                finish();
+            }
+        }
+    }
+
+
+
+    private void switchSearch(String searchName) {
+        recognizer.stop();
+
+        // If we are not spotting, start listening with timeout (10000 ms or 10 seconds).
+        if (searchName.equals(KWS_SEARCH))
+            recognizer.startListening(searchName);
+        else
+            recognizer.startListening(searchName, 10000);
+
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (recognizer != null) {
+            recognizer.cancel();
+            recognizer.shutdown();
+        }
+    }
+
+
+    @Override
+    public void onBeginningOfSpeech() {
+
+    }
+
+
+    @Override
+    public void onEndOfSpeech() {
+        if (!recognizer.getSearchName().equals(KWS_SEARCH))
+            switchSearch(KWS_SEARCH);
+
+    }
+
+    @Override
+    public void onPartialResult(Hypothesis hypothesis) {
+        if (hypothesis == null)
+            return;
+        String text = hypothesis.getHypstr();
+
+        if (text.equals(KEYPHRASE))
+        {
+            start();
+            recognizer.cancel();
+
+
+
+        }
+
+    }
+
+    @Override
+    public void onResult(Hypothesis hypothesis) {
+        if (hypothesis != null) {
+
+
+        }
+
+    }
+
+    @Override
+    public void onError(Exception e) {
+
+    }
+
+    @Override
+    public void onTimeout() {
+        switchSearch(KWS_SEARCH);
+
+    }
+
+    public void start(){
+        promptSpeechInput();
+    }
 }
