@@ -1,10 +1,12 @@
 package com.example.mateusz.inteligentnelustro;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.PowerManager;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,7 +40,7 @@ public class WeatherActivity extends AppCompatActivity implements RecognitionLis
     private static final int REQ_CODE_SPEECH_INPUT = 100;
     public String cityResult;
     public String cityR = "Kielce";
-        private String url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+cityR+"%2C%20pl%22)%20and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+    private String url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+cityR+"%2C%20pl%22)%20and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
     private TextView temp,conditions,city,tvSunrise,tvSunset,tvDay1,tvDay2,tvDay3,tvDay4,tvDay5,tvDay6;
     private ImageView ivDay1,ivDay2,ivDay3,ivDay4,ivDay5,ivDay6;
     private final ImageView[] tab = {ivDay1,ivDay2,ivDay3,ivDay4,ivDay5,ivDay6};
@@ -46,10 +48,11 @@ public class WeatherActivity extends AppCompatActivity implements RecognitionLis
     public int[] imageResources = new int[7];
     private String[] tab3 = new String[7];
     private String[] tab4 = new String[7];
-     private String  result;
+    private String  result;
     private Channel channel;
     private Drawable[] resources = new Drawable[7];
     private List<ForecastDay> fList;
+    protected PowerManager.WakeLock mWakeLock;
 
     private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
     private static final String KWS_SEARCH = "wakeup";
@@ -63,6 +66,9 @@ public class WeatherActivity extends AppCompatActivity implements RecognitionLis
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_weather);
+        final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        this.mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
+        this.mWakeLock.acquire();
 
 
         temp = (TextView) findViewById(R.id.temperature);
@@ -138,12 +144,12 @@ public class WeatherActivity extends AppCompatActivity implements RecognitionLis
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     //txtSpeechInput.setText(result.get(0));
                     if(result.get(0).equals("ekran główny")){
-                        MainView();
+                        mainView();
                         recognizer.cancel();
                         recognizer.shutdown();
                     }else {
-                         cityResult = (String) result.get(0);
-                         weatherFill(cityResult);
+                        cityResult = (String) result.get(0);
+                        weatherFill(cityResult);
                     }
 
                 }
@@ -153,7 +159,7 @@ public class WeatherActivity extends AppCompatActivity implements RecognitionLis
         }
     }
 
-    public void MainView(){
+    public void mainView(){
         Intent startIntent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(startIntent);
     }
@@ -200,12 +206,12 @@ public class WeatherActivity extends AppCompatActivity implements RecognitionLis
                     ForecastDay fd = new ForecastDay();
                     TextView tv;
                     String data;
-                        fd = fList.get(i);
-                        data = " "+fd.getDayW()+ " " + fd.getHigh() + "°c " + fd.getText();
-                        tab3[i-1] = data;
-                       tab4[i - 1] ="@drawable/" + "a" + fd.getCode();
+                    fd = fList.get(i);
+                    data = " "+fd.getDayW()+ " " + fd.getHigh() + "°c " + fd.getText();
+                    tab3[i-1] = data;
+                    tab4[i - 1] ="@drawable/" + "a" + fd.getCode();
                     System.out.println(tab4[i-1]);
-                  imageResources[i-1]  = getResources().getIdentifier(tab4[i-1], null, getPackageName());
+                    imageResources[i-1]  = getResources().getIdentifier(tab4[i-1], null, getPackageName());
                     resources[i-1] = getResources().getDrawable(imageResources[i-1]);
 
 
@@ -243,7 +249,7 @@ public class WeatherActivity extends AppCompatActivity implements RecognitionLis
         System.out.println(data);
         cityR = data;
         String city2 = cityR;
-       String url2 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city2+"%2C%20pl%22)%20and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+        String url2 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city2+"%2C%20pl%22)%20and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
         weather(url2);
 
     }
@@ -332,6 +338,7 @@ public class WeatherActivity extends AppCompatActivity implements RecognitionLis
 
     @Override
     public void onDestroy() {
+        this.mWakeLock.release();
         super.onDestroy();
 
         if (recognizer != null) {

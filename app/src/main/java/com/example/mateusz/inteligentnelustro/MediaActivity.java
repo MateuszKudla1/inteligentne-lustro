@@ -1,9 +1,11 @@
 package com.example.mateusz.inteligentnelustro;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.PowerManager;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,17 +32,15 @@ import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
 
 public class MediaActivity extends AppCompatActivity implements RecognitionListener {
     private final int REQ_CODE_SPEECH_INPUT = 100;
-    TextView txtSpeechInput;
-    Button b1,stop;
     private News obj;
     private List<String> newsList = new ArrayList<>();
-    TextView news1,news2,news3,news4,news5,news6,news7;
+    private TextView news1,news2,news3,news4,news5,news6,news7;
     private String finalUrl="http://www.tvn24.pl/najwazniejsze.xml";
-
     private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
     private static final String KWS_SEARCH = "wakeup";
-    private static final String KEYPHRASE = "hello";
+    private static final String KEYPHRASE = "smart mirror";
     private SpeechRecognizer recognizer;
+    protected PowerManager.WakeLock mWakeLock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +48,11 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_media);
+        final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        this.mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
+        this.mWakeLock.acquire();
 
 
-        wiadomosci();
         news1 = (TextView) findViewById(R.id.news1);
         news2 = (TextView) findViewById(R.id.news2);
         news3 = (TextView) findViewById(R.id.news3);
@@ -58,23 +60,7 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
         news5 = (TextView) findViewById(R.id.news5);
         news6 = (TextView) findViewById(R.id.news6);
 
-
-        news1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                promptSpeechInput();
-
-            }
-        });
-
-        news2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                MainView();
-
-            }
-        });
+        news();
         runRecognizerSetup();
     }
 
@@ -100,6 +86,9 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
         }
     }
 
+
+
+
     /**
      * Receiving speech input
      * */
@@ -114,11 +103,9 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
 
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    //txtSpeechInput.setText(result.get(0));
-
 
                     if(result.get(0).equals("ekran główny")){
-                        MainView();
+                        mainView();
                         recognizer.cancel();
                         recognizer.shutdown();
                     }
@@ -131,12 +118,17 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
     }
 
 
-    public void MainView(){
+
+
+    public void mainView(){
         Intent startIntent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(startIntent);
     }
 
-    public void wiadomosci(){
+
+
+
+    public void news(){
 
         Thread thread = new Thread( new Runnable() {
             @Override
@@ -189,6 +181,8 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
     }
 
 
+
+
     private void runRecognizerSetup() {
         // Recognizer initialization is a time-consuming and it involves IO,
         // so we execute it in async task
@@ -218,6 +212,9 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
         }.execute();
     }
 
+
+
+
     private void setupRecognizer(File assetsDir) throws IOException {
         // The recognizer can be configured to perform multiple searches
         // of different kind and switch between them
@@ -242,6 +239,8 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
     }
 
 
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
@@ -255,6 +254,7 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
             }
         }
     }
+
 
 
 
@@ -272,6 +272,7 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
 
     @Override
     public void onDestroy() {
+        this.mWakeLock.release();
         super.onDestroy();
 
         if (recognizer != null) {
@@ -294,6 +295,7 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
 
     }
 
+
     @Override
     public void onPartialResult(Hypothesis hypothesis) {
         if (hypothesis == null)
@@ -311,6 +313,7 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
 
     }
 
+
     @Override
     public void onResult(Hypothesis hypothesis) {
         if (hypothesis != null) {
@@ -320,16 +323,19 @@ public class MediaActivity extends AppCompatActivity implements RecognitionListe
 
     }
 
+
     @Override
     public void onError(Exception e) {
 
     }
+
 
     @Override
     public void onTimeout() {
         switchSearch(KWS_SEARCH);
 
     }
+
 
     public void start(){
         promptSpeechInput();
