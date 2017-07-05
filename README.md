@@ -24,7 +24,7 @@ This app uses voice commands to interact with user. Each command needs to be pre
 ![alt text](http://imageshack.com/a/img924/2575/T07eV5.png)
 
 
-saying: "smart mirror <city>" will display <city> weather forecast.
+saying: "smart mirror (city)" will display (city) weather forecast.
 
 
 
